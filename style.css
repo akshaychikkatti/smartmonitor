@@ -129,3 +129,26 @@ button {
   border: none;
   cursor: pointer;
 }
+.chart-container {
+  width: 45%;
+  height: 250px;
+  display: inline-block;
+  margin: 10px;
+}
+/* NORMAL */
+.card {
+  border: 2px solid #00ffff;
+  box-shadow: 0 0 10px #00ffff;
+}
+
+/* DANGER */
+.danger {
+  border: 2px solid red !important;
+  box-shadow: 0 0 20px red !important;
+}
+
+/* SAFE */
+.safe {
+  border: 2px solid #00ffff;
+  box-shadow: 0 0 10px #00ffff;
+}
