@@ -3,10 +3,7 @@
 <head>
   <title>Smart IoT Dashboard</title>
 
-  <!-- CSS -->
   <link rel="stylesheet" href="style.css">
-
-  <!-- Chart.js -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
@@ -34,10 +31,21 @@
 
 </div>
 
-<!-- GRAPH -->
 <canvas id="chart"></canvas>
 
-<!-- JS -->
+<!-- 🔗 Connection UI -->
+<div class="connection-box">
+  <button onclick="toggleConnection()" id="connectBtn">
+    🔗 Connect Devices
+  </button>
+
+  <div id="connectionStatus" class="status-badge disconnected">
+    ● Disconnected
+  </div>
+</div>
+
+<h2 id="systemStatus">System Status: Loading...</h2>
+
 <script src="script.js"></script>
 
 </body>
