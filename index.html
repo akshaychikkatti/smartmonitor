@@ -1,4 +1,4 @@
-!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
   <title>Smart IoT Dashboard</title>
@@ -20,15 +20,19 @@
   <h1>🚀 Smart IoT Dashboard</h1>
 
   <div class="container">
-    <div class="card">❤️ Heart: <span id="heart">--</span></div>
-    <div class="card">🌡️ Temp: <span id="temp">--</span></div>
-    <div class="card">🌫️ Air: <span id="air">--</span></div>
-    <div class="card">💧 Water: <span id="water">--</span></div>
-  </div>
+    <div class="card" id="card-heart">❤️ Heart: <span id="heart">--</span></div>
+    <div class="card" id="card-temp">🌡️ Temp: <span id="temp">--</span></div>
+    <div class="card" id="card-air">🌫️ Air: <span id="air">--</span></div>
+    <div class="card" id="card-water">💧 Water: <span id="water">--</span></div>
+    </div>
 
   <div class="chart-container">
-    <canvas id="chart"></canvas>
-  </div>
+  <canvas id="chart1"></canvas>
+</div>
+
+<div class="chart-container">
+  <canvas id="chart2"></canvas>
+</div>
 
   <button id="connectBtn" class="connect-btn">Connect</button>
 
