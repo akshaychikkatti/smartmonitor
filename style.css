@@ -1,0 +1,54 @@
+body {
+  font-family: Arial, sans-serif;
+  color: white;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+
+  /* 🌈 Animated Gradient Background */
+  background: linear-gradient(135deg, #ff512f, #dd2476, #24c6dc, #514a9d);
+  background-size: 400% 400%;
+  animation: gradient 10s ease infinite;
+}
+
+/* 🔥 Animation */
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* 🧠 Title */
+h1 {
+  margin-top: 20px;
+  font-size: 32px;
+}
+
+/* 📦 Cards container */
+.container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  padding: 20px;
+}
+
+/* 💎 Glass cards */
+.card {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  padding: 20px;
+  border-radius: 15px;
+  font-size: 20px;
+  transition: 0.3s;
+}
+
+/* 📊 Graph */
+canvas {
+  margin-top: 30px;
+  max-width: 700px;
+}
+
+/* 🟢 Smooth border glow (optional upgrade) */
+.card:hover {
+  transform: scale(1.05);
+}
