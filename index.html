@@ -1,50 +1,50 @@
-<!DOCTYPE html>
+!DOCTYPE html>
 <html>
 <head>
   <title>Smart IoT Dashboard</title>
-
   <link rel="stylesheet" href="style.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
 
-<h1>🚀 Smart IoT Dashboard</h1>
+<!-- SIDEBAR -->
+<div class="sidebar">
+  <button onclick="showDashboard()">📊</button>
+  <button onclick="showAI()">🤖</button>
+</div>
 
-<div class="container">
+<!-- DASHBOARD -->
+<div id="dashboard" class="main">
 
-  <div class="card">
-    ❤️ Heart Rate: <span id="heart">--</span>
+  <h1>🚀 Smart IoT Dashboard</h1>
+
+  <div class="container">
+    <div class="card">❤️ Heart: <span id="heart">--</span></div>
+    <div class="card">🌡️ Temp: <span id="temp">--</span></div>
+    <div class="card">🌫️ Air: <span id="air">--</span></div>
+    <div class="card">💧 Water: <span id="water">--</span></div>
   </div>
 
-  <div class="card">
-    🌡️ Temperature: <span id="temp">--</span>
+  <div class="chart-container">
+    <canvas id="chart"></canvas>
   </div>
 
-  <div class="card">
-    🌫️ Air Quality: <span id="air">--</span>
-  </div>
+  <button id="connectBtn" class="connect-btn">Connect</button>
 
-  <div class="card">
-    💧 Water Level: <span id="water">--</span>
-  </div>
+  <h2 id="status">Status: --</h2>
 
 </div>
 
-<canvas id="chart"></canvas>
+<!-- AI PAGE -->
+<div id="aiPage" class="main" style="display:none;">
+  <h1>🤖 AI Assistant</h1>
 
-<!-- 🔗 Connection UI -->
-<div class="connection-box">
-  <button onclick="toggleConnection()" id="connectBtn">
-    🔗 Connect Devices
-  </button>
+  <div id="chatBox"></div>
 
-  <div id="connectionStatus" class="status-badge disconnected">
-    ● Disconnected
-  </div>
+  <input id="userInput" placeholder="Ask something..." />
+  <button onclick="send()">Send</button>
 </div>
-
-<h2 id="systemStatus">System Status: Loading...</h2>
 
 <script src="script.js"></script>
 
