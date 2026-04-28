@@ -1,92 +1,131 @@
+/* BACKGROUND */
 body {
-  font-family: Arial;
-  color: white;
-  text-align: center;
   margin: 0;
-  padding: 0;
-
-  background: linear-gradient(135deg, #ff512f, #dd2476, #24c6dc, #514a9d);
-  background-size: 400% 400%;
-  animation: gradient 10s ease infinite;
+  font-family: Arial;
+  color: #00ffff;
+  background: radial-gradient(circle at top, #001a33, #000000 70%);
 }
 
-@keyframes gradient {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+/* SIDEBAR */
+.sidebar {
+  position: fixed;
+  width: 60px;
+  height: 100%;
+  background: #050505;
+  box-shadow: 0 0 15px #00ffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 20px;
 }
 
+.sidebar button {
+  margin: 20px 0;
+  font-size: 20px;
+  background: none;
+  border: none;
+  color: #00ffff;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.sidebar button:hover {
+  text-shadow: 0 0 10px #00ffff;
+  transform: scale(1.2);
+}
+
+/* MAIN */
+.main {
+  margin-left: 70px;
+  padding: 20px;
+}
+
+/* TITLE */
+h1 {
+  text-shadow: 0 0 15px #00ffff;
+}
+
+/* CARDS */
 .container {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
-  padding: 20px;
-}
-
-.card {
-  background: rgba(255,255,255,0.15);
-  backdrop-filter: blur(10px);
-  padding: 20px;
-  border-radius: 15px;
-  font-size: 20px;
-}
-
-/* graph */
-canvas {
-  width: 500px !important;
-  height: 250px !important;
-  margin: 20px auto;
-}
-
-/* button */
-button {
-  padding: 12px 25px;
-  border-radius: 25px;
-  border: none;
-  font-size: 16px;
-  cursor: pointer;
-
-  background: linear-gradient(45deg,#00c6ff,#0072ff);
-  color: white;
-  box-shadow: 0 0 10px #00c6ff;
-}
-
-button:hover {
-  transform: scale(1.1);
-}
-
-/* connection box */
-.connection-box {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  grid-template-columns: 1fr 1fr;
   gap: 15px;
 }
 
-/* status badge */
-.status-badge {
-  padding: 8px 15px;
-  border-radius: 20px;
+.card {
+  padding: 15px;
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.6);
+  border: 2px solid #00ffff;
+  box-shadow: 0 0 15px #00ffff;
+  transition: 0.3s;
+}
+
+.card:hover {
+  box-shadow: 0 0 25px #00ffff;
+  transform: scale(1.02);
+}
+
+/* GRAPH */
+.chart-container {
+  width: 100%;
+  max-width: 500px;
+  height: 250px;
+  margin-top: 20px;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 0 0 20px #00ffff;
+}
+
+/* BUTTON */
+.connect-btn {
+  margin-top: 20px;
+  padding: 12px 30px;
+  background: linear-gradient(45deg, #00ffff, #0077ff);
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
   font-weight: bold;
+  color: black;
+  box-shadow: 0 0 15px #00ffff;
+  transition: 0.3s;
 }
 
-.disconnected {
-  background: rgba(255,0,0,0.2);
-  color: red;
-  box-shadow: 0 0 10px red;
+.connect-btn:hover {
+  box-shadow: 0 0 30px #00ffff;
+  transform: scale(1.1);
 }
 
-.connected {
-  background: rgba(0,255,0,0.2);
-  color: lime;
-  box-shadow: 0 0 10px lime;
+/* STATUS */
+#status {
+  margin-top: 15px;
+  font-size: 18px;
+  text-shadow: 0 0 10px #00ffff;
 }
 
-/* alerts */
-.safe {
-  border: 2px solid lime;
+/* AI CHAT */
+#chatBox {
+  height: 200px;
+  overflow-y: auto;
+  border: 2px solid #00ffff;
+  padding: 10px;
+  margin-bottom: 10px;
+  box-shadow: 0 0 10px #00ffff;
 }
 
-.danger {
-  border: 2px solid red;
+input {
+  padding: 10px;
+  width: 70%;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+}
+
+button {
+  padding: 10px 15px;
+  margin-left: 10px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
 }
