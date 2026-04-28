@@ -1,102 +1,161 @@
+let isConnected = false;
+let interval = null;
+let chart = null;
+
 window.onload = function () {
 
-  let sound = new Audio("alert.mp3");
+  console.log("JS LOADED ✅");
 
-  function speak(msg) {
-    let s = new SpeechSynthesisUtterance(msg);
-    speechSynthesis.speak(s);
-  }
+  // CONNECT BUTTON
+  document.getElementById("connectBtn").addEventListener("click", toggleConnection);
 
-  // connection
-  let isConnected = false;
+  // CREATE GRAPH
+  let canvas = document.getElementById("chart");
+  let ctx = canvas.getContext("2d");
 
-  window.toggleConnection = function () {
-    let status = document.getElementById("connectionStatus");
-    let btn = document.getElementById("connectBtn");
-
-    if (!isConnected) {
-      status.innerText = "● Connected";
-      status.className = "status-badge connected";
-      btn.innerText = "Disconnect Devices";
-      speak("Devices connected");
-    } else {
-      status.innerText = "● Disconnected";
-      status.className = "status-badge disconnected";
-      btn.innerText = "Connect Devices";
-      speak("Devices disconnected");
-    }
-
-    isConnected = !isConnected;
-  };
-
-  // chart
-  let ctx = document.getElementById("chart").getContext("2d");
-
-  let chart = new Chart(ctx, {
+  chart = new Chart(ctx, {
     type: "line",
     data: {
       labels: [],
-      datasets: [{
-        label: "Heart Rate",
-        data: [],
-        borderColor: "cyan"
-      }]
+      datasets: [
+  {
+    label: "Heart",
+    data: [],
+    borderColor: "cyan",
+    borderWidth: 2,
+    tension: 0.3
+  },
+  {
+    label: "Temp",
+    data: [],
+    borderColor: "orange",
+    borderWidth: 2,
+    tension: 0.3
+  },
+  {
+    label: "Air",
+    data: [],
+    borderColor: "lime",
+    borderWidth: 2,
+    tension: 0.3
+  },
+  {
+    label: "Water",
+    data: [],
+    borderColor: "blue",
+    borderWidth: 2,
+    tension: 0.3
+  }
+]
+      
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false
     }
   });
 
-  // main loop
-  setInterval(() => {
+};
 
-    let heart = Math.floor(Math.random()*40)+60;
-    let temp = (Math.random()*2+36).toFixed(1);
-    let air = Math.floor(Math.random()*200);
-    let water = Math.floor(Math.random()*100);
+// CONNECT / DISCONNECT
+function toggleConnection() {
+
+  let status = document.getElementById("status");
+  let btn = document.getElementById("connectBtn");
+
+  if (!isConnected) {
+
+    btn.innerText = "Disconnect";
+    status.innerText = "✅ Connected";
+
+    startSystem();
+
+  } else {
+
+    btn.innerText = "Connect";
+    status.innerText = "❌ Disconnected";
+
+    stopSystem();
+  }
+
+  isConnected = !isConnected;
+}
+
+// START DATA
+function startSystem() {
+
+  interval = setInterval(() => {
+
+    let heart = Math.floor(Math.random() * 120);
+    let temp = (Math.random() * 5 + 35).toFixed(1);
+    let air = Math.floor(Math.random() * 200);
+    let water = Math.floor(Math.random() * 100);
 
     document.getElementById("heart").innerText = heart;
     document.getElementById("temp").innerText = temp;
     document.getElementById("air").innerText = air;
     document.getElementById("water").innerText = water;
 
-    update("heart", heart>100);
-    update("temp", temp>38);
-    update("air", air>150);
-    update("water", water>80);
+    // GRAPH UPDATE (SAFE)
+    if (chart && chart.data) {
 
-    chart.data.labels.push("");
-    chart.data.datasets[0].data.push(heart);
+      chart.data.labels.push("");
+      chart.data.datasets[0].data.push(heart);
+      chart.data.datasets[1].data.push(temp);
+      chart.data.datasets[2].data.push(air);
+      chart.data.datasets[3].data.push(water);
 
-    if(chart.data.labels.length>10){
-      chart.data.labels.shift();
-      chart.data.datasets[0].data.shift();
+      if (chart.data.labels.length > 10) {
+        chart.data.labels.shift();
+        chart.data.datasets[0].data.shift();
+      }
+
+      chart.update();
     }
 
-    chart.update();
+    // SIMPLE WARNING
+    let status = document.getElementById("status");
 
-    let statusText = document.getElementById("systemStatus");
-
-    if (heart>100 || temp>38 || air>150 || water>80){
-      statusText.innerText="⚠️ System Status: CRITICAL";
-      statusText.style.color="red";
+    if (heart > 100) {
+      status.innerText = "⚠️ High Heart Rate";
+    } else if (temp > 38) {
+      status.innerText = "⚠️ High Temperature";
+    } else if (air > 150) {
+      status.innerText = "⚠️ Air Pollution High";
+    } else if (water > 80) {
+      status.innerText = "⚠️ Water Level High";
     } else {
-      statusText.innerText="✅ System Status: NORMAL";
-      statusText.style.color="lime";
+      status.innerText = "✅ Normal";
     }
 
-  },3000);
+  }, 2000);
+}
 
-  function update(id, cond){
-    let card=document.getElementById(id).parentElement;
+// STOP
+function stopSystem() {
+  clearInterval(interval);
+}
 
-    if(cond){
-      card.classList.add("danger");
-      card.classList.remove("safe");
+// NAVIGATION
+function showAI() {
+  document.getElementById("dashboard").style.display = "none";
+  document.getElementById("aiPage").style.display = "block";
+}
 
-      sound.play();
-      speak("Warning");
-    } else {
-      card.classList.add("safe");
-      card.classList.remove("danger");
-    }
-  }
+function showDashboard() {
+  document.getElementById("dashboard").style.display = "block";
+  document.getElementById("aiPage").style.display = "none";
+}
 
-};
+// SIMPLE AI CHAT
+function send() {
+  let input = document.getElementById("userInput").value;
+  if (!input) return;
+
+  let box = document.getElementById("chatBox");
+
+  box.innerHTML += "<div>You: " + input + "</div>";
+  box.innerHTML += "<div>AI: Hello bro 😎</div>";
+
+  document.getElementById("userInput").value = "";
+}
