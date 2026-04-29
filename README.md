@@ -1,5 +1,5 @@
 # smartmonitor
-This is our smarth monitring system where using coding and tecnoligy a web page is devloped where 
+This is our Smart monitring system where using coding and tecnoligy a web page is devloped where 
 the patient  detale are filled  
 #Feature 
 1).A smarth helth watch is give to patient which usises sensar to detect heart rate and other things 
